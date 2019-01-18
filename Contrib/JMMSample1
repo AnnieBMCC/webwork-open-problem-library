@@ -1,0 +1,62 @@
+DOCUMENT();
+loadMacros(
+"PGstandard.pl",
+"MathObjects.pl",
+"draggableProof.pl",
+);
+
+TEXT(beginproblem());
+
+$CorrectProof = DraggableProof([
+"Definition of the derivative:  
+\( f'(x)=\lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \)",
+
+"Use \( f(x)=x^2+5x \)                                                    
+\( f'(x)=\lim_{h \to 0} \frac{(x+h)^2+5(x+h)-(x^2+5x)}{h} \)",
+
+"Begin Simplifying:  
+\( f'(x)=\lim_{h \to 0} \frac{(x+h)(x+h)+5(x+h)-x^2-5x}{h} \)",
+
+
+"Distribute:  
+\( f'(x)=\lim_{h \to 0} \frac{x^2+2xh+h^2+5x+5h-x^2-5x}{h} \)",
+
+"Simplify:     
+\( f'(x)=\lim_{h \to 0} \frac{h^2+2xh+5h}{h}\)",
+
+"Factor:  
+\( f'(x)=\lim_{h \to 0} \frac{h(h+2x+5)}{h} \)",
+
+"Cancel:  
+\( f'(x)=\lim_{h \to 0} h+2x+5 \)",
+
+"Evaluate the limit:  
+\( f'(x)=2x+5 \)"
+
+],
+
+[
+]
+);
+
+Context()->texStrings;
+
+BEGIN_TEXT
+
+Order the steps to calculate the derivative(slope of the tangent line) using the definition:  
+$BR
+
+Select \{ $CorrectProof->numNeeded \} of the following.
+$BR
+
+\{ $CorrectProof->Print \}
+
+END_TEXT
+Context()->normalStrings;
+
+# Answer Evaluation
+
+ANS($CorrectProof->cmp);
+
+
+ENDDOCUMENT();
